@@ -25,13 +25,15 @@ class PGSQLCreateTable
     /**
      * создание таблиц
      */
-    public function createTables()
+
+    // Создание таблицы с пользователями
+    public function createTableUsers()
     {
         $sql = 'CREATE TABLE IF NOT EXISTS public.users
         (
             id serial PRIMARY KEY,
-            name character varying(50) COLLATE pg_catalog."default",
-            lastname character varying(50) COLLATE pg_catalog."default",
+            name character varying(150) COLLATE pg_catalog."default",
+            lastname character varying(150) COLLATE pg_catalog."default",
             age integer,
             description text COLLATE pg_catalog."default"
         );';
@@ -40,4 +42,23 @@ class PGSQLCreateTable
 
         return $this;
     }
+
+
+    // Создание таблицы с постами
+    public function createTablePosts()
+    {
+        $sql = 'CREATE TABLE IF NOT EXISTS public.posts
+        (
+            id serial PRIMARY KEY,
+            title character varying(150) COLLATE pg_catalog."default",
+            text text COLLATE pg_catalog."default",
+            created date
+        );';
+
+        $this->pdo->exec($sql);
+
+        return $this;
+    }
 }
+
+?>
